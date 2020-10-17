@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    image: node:14.1.0-alpine
+    restart: unless-stopped
+    working_dir: /app
+    # ports:
+      # - '${HTTP_PORT}:1337'
+    volumes:
+      - ./:/app
+      # - ${OUTPUT_VOLUME}/log/nginx:/var/log/nginx
+    # command: ./start.sh
+    networks:
+      - default
+  db:
+    image: mongo:4.4.0
+    restart: unless-stopped
+    # working_dir: /app
+    ports:
+      - '${DB_PORT}:27017'
+    # volumes:
+      # - ./:/app
+      # - ${OUTPUT_VOLUME}/log/nginx:/var/log/nginx
+    # command: ./start.sh
+    networks:
+      - default
