@@ -4,7 +4,11 @@
     <hr/>
     <p>This is a page that only logged-in people can visit. Don't you feel special? Try clicking on a button below to do some things you can't do when you're logged out.</p>
     <div class="buttons">
-      <a class="btn btn-info" href="/account/profile">Update my email</a>
+      <a class="btn btn-info" href="/subscribe/sala1">Suscribir Sala 1</a>
+      <a class="btn btn-info" href="/subscribe/sala2">Suscribir Sala 2</a>
+      <a class="btn btn-info" href="/subscribe/sala3">Suscribir Sala 3</a>
+      <a class="btn btn-info" href="/subscribe/sala4">Suscribir Sala 4</a>
+      <a class="btn btn-info" href="/unsubscribe/sala1">Des Suscribir Sala 4</a>
       <button class="btn btn-outline-info ml-2" @click="clickOpenExampleModalButton()">Open a modal</button>
     </div>
   </div>
@@ -99,4 +103,32 @@
     </div>
   </modal>
 </div>
+<!-- Simply include the sails.io.js script, and a client socket will be created for you -->
+<script type="text/javascript" src="/dependencies/sails.io.js"></script>
+<script type="text/javascript">
+// The automatically-created socket is exposed as io.socket.
+// Use .on() to subscribe to the 'user' event on the client.
+// This event is sent by the Sails "create", "update",
+// "delete", "add" and "remove" blueprints to any socket that
+// is subscribed to one or more User model instances.
+// io.socket.on(null, function (data) {
+//   console.log('Mensaje Sin Suscripcion', data);
+// });
+// io.socket.on("", function (data) {
+//   console.log('Mensaje Sin Suscripcion', data);
+// });
+// io.socket.on("all", function (data) {
+//   console.log('Mensaje Sin Suscripcion', data);
+// });
+// io.socket.on('sala1', function  (data) {
+//   console.log('on Sala1:', data);
+// });
+// io.socket.on('message', function  (data) {
+//   console.log('on message:', data);
+// });
+
+// io.socket.request({method: 'GET', url:'/join/room0'})
+// io.socket.request({method: 'GET', url:'/message/room0/'+Math.random()})
+
+</script>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
