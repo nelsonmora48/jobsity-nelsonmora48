@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     working_dir: /app
     # ports:
-      # - '${HTTP_PORT}:1337'
+    # - '${HTTP_PORT}:1337'
     volumes:
       - ./:/app
       # - ${OUTPUT_VOLUME}/log/nginx:/var/log/nginx
@@ -19,8 +19,18 @@ services:
     ports:
       - '${DB_PORT}:27017'
     # volumes:
-      # - ./:/app
-      # - ${OUTPUT_VOLUME}/log/nginx:/var/log/nginx
+    # - ./:/app
+    # - ${OUTPUT_VOLUME}/log/nginx:/var/log/nginx
     # command: ./start.sh
+    networks:
+      - default
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=secret
+    ports:
+      - '8080:15672'
+      - '5672:5672'
     networks:
       - default
