@@ -20,29 +20,19 @@ module.exports = {
 
   fn: async function (inputs) {
     if (inputs.payload === '/stock') {
-      amqp.connect('amqp://user:secret@localhost', function (error0, connection) {
-        if (error0) {
-          throw error0;
-        }
-        connection.createChannel(function (error1, channel) {
-          if (error1) {
-            throw error1;
-          }
-          var queue = 'stock';
-          var msg = {
-            user: sails.sockets.getId(this.req),
-            stock_code: 'appl.us'
-          };
-
-          channel.assertQueue(queue, {
-            durable: true,
-          });
-
-          channel.sendToQueue(queue, Buffer.from(msg));
-          console.log(' [x] Sent %s', msg);
-        });
-      });
+      const msg = {
+        user: sails.sockets.getId(this.req),
+        stock_code: 'appl.us',
+      };
+      global.amqp_channel.publish(
+        'chat_to_bot',
+        '',
+        Buffer.from(JSON.stringify(msg))
+      );
+      // Return Resolv and breaks ode to not record Bot Commands
+      return Promise.resolve();
     }
+
     const post = await Post.create({
       postedAt: Date.now(),
       room: inputs.room,
