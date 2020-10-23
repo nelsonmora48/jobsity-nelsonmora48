@@ -19,22 +19,28 @@ module.exports = {
     // Join Connection Socket to Room
     sails.sockets.join(this.req, inputs.room);
     // Query Last 50 Messages from Database
-    const last50Messages = await Post.find({ where: { room: inputs.room }, limit: 50, sort: "createdAt DESC" });
+    const last50Messages = await Post.find({
+      where: { room: inputs.room },
+      limit: 50,
+      sort: 'createdAt',
+    });
     // Broadcast Result with Last 50 Messages
     sails.sockets.broadcast(websocketId, 'message', last50Messages);
     // Announce a User has Joined a other Users in the Room
     sails.sockets.broadcast(
       inputs.room,
       'message',
-      [{
-        postedAt: Date.now(),
-        room: inputs.room,
-        payload: 'User ' + this.req.me.fullName + ' has Income',
-        user: this.req.me.fullName,
-      }],
+      [
+        {
+          postedAt: Date.now(),
+          room: inputs.room,
+          payload: 'User ' + this.req.me.fullName + ' has Income',
+          user: this.req.me.fullName,
+        },
+      ],
       websocketId
     );
-    // Announce Room Creation 
+    // Announce Room Creation
     // sails.sockets.blast('all', 'Creado Room ' + inputs.room);
     return Promise.resolve();
   },
