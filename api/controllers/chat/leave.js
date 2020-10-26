@@ -14,9 +14,24 @@ module.exports = {
   exits: {},
 
   fn: async function (inputs) {
-    // console.log(this.req.me);
+    const websocketId = sails.sockets.getId(this.req);
+
+    // Join Connection Socket to Room
     sails.sockets.leave(this.req, inputs.room);
-    // sails.sockets.blast('Un Usuario ha dejado el Room ' + inputs.room);
+    // Announce a User has Left the Room
+    sails.sockets.broadcast(
+      inputs.room,
+      'message',
+      [
+        {
+          postedAt: Date.now(),
+          room: inputs.room,
+          payload: '[ has Left ]',
+          user: this.req.me.fullName,
+        },
+      ],
+      this.req
+    );
     return Promise.resolve();
   },
 };

@@ -34,11 +34,11 @@ module.exports = {
         {
           postedAt: Date.now(),
           room: inputs.room,
-          payload: 'User ' + this.req.me.fullName + ' has Income',
+          payload: '[ has Joined ]',
           user: this.req.me.fullName,
         },
       ],
-      websocketId
+      this.req
     );
     // Announce Room Creation
     // sails.sockets.blast('all', 'Creado Room ' + inputs.room);
