@@ -8,7 +8,6 @@ services:
     - '${HTTP_PORT}:1337'
     volumes:
       - ./backend:/app
-      - ${NPM_CACHE_FOLDER}:/root/.npm
     command: ./start.sh
     networks:
       - default
