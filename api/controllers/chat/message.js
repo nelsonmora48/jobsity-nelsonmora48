@@ -1,5 +1,3 @@
-const amqp = require('amqplib/callback_api');
-
 module.exports = {
   friendlyName: 'Message',
 
@@ -19,10 +17,12 @@ module.exports = {
   exits: {},
 
   fn: async function (inputs) {
-    if (inputs.payload === '/stock') {
+    if (new RegExp(/\/stock=/).test(inputs.payload)) {
+      const text = inputs.payload.replace('/stock=', '');
+
       const msg = {
         user: sails.sockets.getId(this.req),
-        stock_code: 'appl.us',
+        stock_code: text.trim(),
       };
       global.amqp_channel.publish(
         'chat_to_bot',
