@@ -1,10 +1,11 @@
 const amqp = require("amqplib");
+require('dotenv').config()
 const handleEvent = require("./handleEvent");
 
 (async () => {
   try {
     // Create Connection to MQ
-    const connection = await amqp.connect("amqp://user:secret@localhost");
+    const connection = await amqp.connect(procees.env.URL_AMPQ);
     // Create Channel
     const channel = await connection.createChannel();
     // Create Exchange
@@ -30,7 +31,7 @@ const handleEvent = require("./handleEvent");
 
     let stock_response={};
     await channel.consume(q_to_bot.queue, async (msg) => {
-        stock_response = await handleEvent(msg);
+        stock_response = await handleEvent(msg, process.env.URL_STOQ);
         await channel.publish("bot_to_chat", "", Buffer.from(JSON.stringify(stock_response)));
     });
 
