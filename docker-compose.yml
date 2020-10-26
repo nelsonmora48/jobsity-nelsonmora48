@@ -1,27 +1,31 @@
 version: '3'
 services:
-  app:
+  backend:
     image: node:14.1.0-alpine
     restart: unless-stopped
     working_dir: /app
-    # ports:
-    # - '${HTTP_PORT}:1337'
+    ports:
+    - '${HTTP_PORT}:1337'
     volumes:
-      - ./:/app
-      # - ${OUTPUT_VOLUME}/log/nginx:/var/log/nginx
-    # command: ./start.sh
+      - ./backend:/app
+      - ${NPM_CACHE_FOLDER}:/root/.npm
+    command: ./start.sh
+    networks:
+      - default
+  bot:
+    image: node:14.1.0-alpine
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./bot:/app
+    command: ./start.sh
     networks:
       - default
   db:
     image: mongo:4.4.0
     restart: unless-stopped
-    # working_dir: /app
     ports:
       - '${DB_PORT}:27017'
-    # volumes:
-    # - ./:/app
-    # - ${OUTPUT_VOLUME}/log/nginx:/var/log/nginx
-    # command: ./start.sh
     networks:
       - default
   rabbitmq:

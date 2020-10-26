@@ -1,0 +1,2 @@
+yarn --verbose
+yarn start
