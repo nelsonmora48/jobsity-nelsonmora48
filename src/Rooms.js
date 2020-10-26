@@ -28,38 +28,44 @@ export default function Rooms() {
 
   return (
     <>
-      <table>
-        <tbody>
-          <tr>
-            <th colSpan={2}>Chat Rooms:</th>
-          </tr>
-          {rooms.map((data, k) => (
-            <tr key={k}>
-              <td>{data}</td>
-              <td>
-                <button name={data} onClick={handleJoin}>
-                  Join
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>
-              <button onClick={handleNewRoom}>New Room</button>
-            </td>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table>
-      {actualRoom !== "" && (
-        <ChatBoard
-          io={io}
-          actualRoom={actualRoom}
-          setActualRoom={setActualRoom}
-        />
-      )}
+      <div className='rowstyle'>
+        <div className='columnstyle'>
+          <table>
+            <tbody>
+              <tr>
+                <th colSpan={2}>Chat Rooms:</th>
+              </tr>
+              {rooms.map((data, k) => (
+                <tr key={k}>
+                  <td>{data}</td>
+                  <td>
+                    <button name={data} onClick={handleJoin}>
+                      Join
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>
+                  <button onClick={handleNewRoom}>New Room</button>
+                </td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div className="columnstyle">
+          {actualRoom !== "" && (
+            <ChatBoard
+              io={io}
+              actualRoom={actualRoom}
+              setActualRoom={setActualRoom}
+            />
+          )}
+        </div>
+      </div>
     </>
   );
 }
