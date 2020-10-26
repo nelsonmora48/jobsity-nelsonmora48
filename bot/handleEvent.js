@@ -23,13 +23,14 @@ module.exports = async (msg, url) => {
     const buffer = await response_fetch.buffer();
     // Parse Body Split by Lines, Gets second line and get de 6th position corresponding Current Quote (HOLC)
     const quote = buffer.toString().split("\r\n")[1].split(",")[6];
-    if (quote !== "$N/D") {
+    if (quote !== "N/D") {
       response = `${json_msg.stock_code.toUpperCase()} quote is $${quote} per share`;
     } else {
       response = `${json_msg.stock_code.toUpperCase()} not Found`;
     }
     return { user: json_msg.user, response: response };
   } catch (error) {
+    console.log(error);
     return { user: json_msg.user, response: "Bot has trouble getting data" };
   } finally {
     clearTimeout(timeout);
