@@ -5,7 +5,7 @@ const handleEvent = require("./handleEvent");
 (async () => {
   try {
     // Create Connection to MQ
-    const connection = await amqp.connect(procees.env.URL_AMPQ);
+    const connection = await amqp.connect(process.env.URL_AMPQ);
     // Create Channel
     const channel = await connection.createChannel();
     // Create Exchange
