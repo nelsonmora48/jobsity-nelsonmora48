@@ -68,8 +68,9 @@ module.exports.routes = {
     action: 'deliver-contact-form-message',
   },
 
-  'POST /message/:room': { action: 'chat/message' },
-  'GET /message/:room': { action: 'chat/message' },
+  'GET /message': { action: 'chat/message' },
   'GET /join/:room': { action: 'chat/join' },
-  'GET /leave/:room': { action: 'chat/leave' },
+  'GET /leave': { action: 'chat/leave' },
+  'GET /rooms': { action: 'chat/rooms' },
+  'GET /roomCreate': { action: 'chat/createroom' },
 };

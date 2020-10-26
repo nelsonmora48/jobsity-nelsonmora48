@@ -1,13 +1,11 @@
+const obtainUserRoom = require('../../obtainUserRoom.js');
+
 module.exports = {
   friendlyName: 'Message',
 
   description: 'Handles the Chat s messages',
 
   inputs: {
-    room: {
-      type: 'string',
-      required: true,
-    },
     payload: {
       type: 'string',
       required: true,
@@ -17,6 +15,7 @@ module.exports = {
   exits: {},
 
   fn: async function (inputs) {
+    // Command Detection
     if (new RegExp(/\/stock=/).test(inputs.payload)) {
       const text = inputs.payload.replace('/stock=', '');
 
@@ -29,17 +28,20 @@ module.exports = {
         '',
         Buffer.from(JSON.stringify(msg))
       );
-      // Return Resolv and breaks ode to not record Bot Commands
+      // Return Resolve and breaks ode to not record Bot Commands
       return Promise.resolve();
     }
 
+    const room = obtainUserRoom(this.req);
+    console.log('record msg to ' + room);
     const post = await Post.create({
       postedAt: Date.now(),
-      room: inputs.room,
+      room: room,
       payload: inputs.payload,
       user: this.req.me.fullName,
     }).fetch();
-    sails.sockets.broadcast(inputs.room, 'message', [post]);
+
+    sails.sockets.broadcast(room, 'message', [post]);
     return Promise.resolve();
   },
 };

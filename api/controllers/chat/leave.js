@@ -1,37 +1,17 @@
+const userLeavesRoom = require('../../userLeavesRoom');
+
 module.exports = {
-  friendlyName: 'Message',
+  friendlyName: 'Leva Room',
 
-  description: 'Handles the Chat s messages',
+  description: 'Handles the User Left Room',
 
-  inputs: {
-    room: {
-      type: 'string',
-      required: true,
-      isNotEmptyString: true,
-    },
-  },
+  inputs: {},
 
   exits: {},
 
   fn: async function (inputs) {
-    const websocketId = sails.sockets.getId(this.req);
+    userLeavesRoom(this.req);
 
-    // Join Connection Socket to Room
-    sails.sockets.leave(this.req, inputs.room);
-    // Announce a User has Left the Room
-    sails.sockets.broadcast(
-      inputs.room,
-      'message',
-      [
-        {
-          postedAt: Date.now(),
-          room: inputs.room,
-          payload: '[ has Left ]',
-          user: this.req.me.fullName,
-        },
-      ],
-      this.req
-    );
     return Promise.resolve();
   },
 };
