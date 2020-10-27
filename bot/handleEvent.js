@@ -3,7 +3,7 @@ const AbortController = require("abort-controller");
 const controller = new AbortController();
 const timeout = setTimeout(() => {
   controller.abort();
-}, 30000);
+}, 300000);
 
 module.exports = async (msg, url) => {
   let response;
