@@ -12,7 +12,7 @@
 module.exports.bootstrap = async function () {
   const amqp = require('amqplib');
   // Create Connection to MQ
-  const connection = await amqp.connect('amqp://user:secret@rabbitmq');
+  const connection = await amqp.connect('amqp://user:secret@localhost:5672');
   // Create Channel
   global.amqp_channel = await connection.createChannel();
   // Create Exchange

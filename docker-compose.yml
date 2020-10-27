@@ -1,36 +1,5 @@
 version: '3'
 services:
-  backend:
-    image: node:14.1.0-alpine
-    restart: unless-stopped
-    working_dir: /app
-    ports:
-    - '${HTTP_PORT}:1337'
-    volumes:
-      - ./backend:/app
-    command: ./start.sh
-    networks:
-      - default
-  frontend:
-    image: node:14.1.0-alpine
-    restart: unless-stopped
-    working_dir: /app
-    ports:
-    - '3000:3000'
-    volumes:
-      - ./frontend:/app
-    command: ./start.sh
-    networks:
-      - default
-  bot:
-    image: node:14.1.0-alpine
-    restart: unless-stopped
-    working_dir: /app
-    volumes:
-      - ./bot:/app
-    command: ./start.sh
-    networks:
-      - default
   db:
     image: mongo:4.4.0
     restart: unless-stopped

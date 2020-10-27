@@ -49,7 +49,7 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-mongo',
-    url: 'mongodb://db:27017/chantbot',
+    url: 'mongodb://localhost:27017/chantbot',
 
   },
 
