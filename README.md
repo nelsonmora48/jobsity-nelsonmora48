@@ -34,3 +34,18 @@ The frontend app (and the bot and backends) runs better from preinstalled node r
 Nelson D. Mora
 
 
+Backend Details:
+I have started with a fresh installation of Sails Framework but i have added and modify this files:
+
+- ./bakcend/api/controller/chat/*
+- ./bakcend/api/models/*chat/**
+- ./backend/api/broadcastLastMessages.js
+- ./backend/api/obtainUserRoom.js
+- ./backend/api/userLeavesRoom.js
+- ./backned/config/bootstrap.js
+- ./backned/config/routes.js
+
+Frontend Details:
+I Have started wuth a fresh installation of Create React App but u have added and modify this files:
+- ./frontend/src/ChatBoard.js
+- ./frontend/src/Rooms.js
