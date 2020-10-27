@@ -11,6 +11,17 @@ services:
     command: ./start.sh
     networks:
       - default
+  frontend:
+    image: node:14.1.0-alpine
+    restart: unless-stopped
+    working_dir: /app
+    ports:
+    - '3000:3000'
+    volumes:
+      - ./frontend:/app
+    command: ./start.sh
+    networks:
+      - default
   bot:
     image: node:14.1.0-alpine
     restart: unless-stopped

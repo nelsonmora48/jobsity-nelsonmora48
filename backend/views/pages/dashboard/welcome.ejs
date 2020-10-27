@@ -1,7 +1,7 @@
 <div id="welcome">
   <div class="container">
     <h1>Welcome!</h1>
-    <div id="root"></div>
+    <a href="http://localhost:3000/">Go to Chat Rooms</a>
   </div>
 
   <router-view></router-view>
@@ -104,32 +104,4 @@
     </div>
   </modal>
 </div>
-<!-- Simply include the sails.io.js script, and a client socket will be created for you -->
-<script type="text/javascript" src="/dependencies/sails.io.js"></script>
-<script type="text/javascript">
-// The automatically-created socket is exposed as io.socket.
-// Use .on() to subscribe to the 'user' event on the client.
-// This event is sent by the Sails "create", "update",
-// "delete", "add" and "remove" blueprints to any socket that
-// is subscribed to one or more User model instances.
-// io.socket.on(null, function (data) {
-//   console.log('Mensaje Sin Suscripcion', data);
-// });
-// io.socket.on("", function (data) {
-//   console.log('Mensaje Sin Suscripcion', data);
-// });
-// io.socket.on("all", function (data) {
-//   console.log('Mensaje Sin Suscripcion', data);
-// });
-// io.socket.on('sala1', function  (data) {
-//   console.log('on Sala1:', data);
-// });
-// io.socket.on('message', function  (data) {
-//   console.log('on message:', data);
-// });
-
-// io.socket.request({method: 'GET', url:'/join/room0'})
-// io.socket.request({method: 'GET', url:'/message/room0/'+Math.random()})
-
-</script>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
